@@ -77,7 +77,7 @@ function update(level) {
   levelChanges();
 
   // map level
-  var levelChange = map(level, 1, 10, 0.3, 0.8);
+  var levelChange = map(level, 1, 10, 0.3, 0.87);
 
   //update pads
   padL.y = mouseY;
