@@ -7,6 +7,7 @@ var padR = {};
 
 var scoreL = 0;
 var scoreR = 0;
+var currentLevel = 1;
 
 //////////////// run when html loads /////////////////
 
@@ -47,7 +48,8 @@ function draw() {
   strokeWeight(3);
   line(width/2, 0, width/2, height);
 
-  update();
+  //level in parenthesis from 1-10
+  update(currentLevel);
 
   //draw ball
   noStroke();
@@ -66,7 +68,16 @@ function draw() {
 
 }
 
-function update() {
+function levelChanges() {
+  currentLevel = map(scoreL, 0, 12, 1, 10);
+}
+
+function update(level) {
+
+  levelChanges();
+
+  // map level
+  var levelChange = map(level, 1, 10, 0.3, 0.8);
 
   //update pads
   padL.y = mouseY;
@@ -74,7 +85,7 @@ function update() {
   var badPlayer = map(noise(frameCount*0.01), 0, 1, 0, height);
   var perfectPlayer = padR.y = ball.y;
   var distPadR = map(dist(ball.x, ball.y, padR.x, padR.y), 0, width, 0, 1);
-  var padRlerp = lerp(perfectPlayer, badPlayer, 0.3 + distPadR);
+  var padRlerp = lerp(badPlayer, perfectPlayer, levelChange - distPadR);
   padR.y = padRlerp;
 
   //update ball pos
