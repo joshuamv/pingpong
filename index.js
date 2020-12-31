@@ -74,7 +74,7 @@ function update() {
   var badPlayer = map(noise(frameCount*0.01), 0, 1, 0, height);
   var perfectPlayer = padR.y = ball.y;
   var distPadR = map(dist(ball.x, ball.y, padR.x, padR.y), 0, width, 0, 1);
-  var padRlerp = lerp(perfectPlayer, badPlayer, 0.1 + distPadR);
+  var padRlerp = lerp(perfectPlayer, badPlayer, 0.3 + distPadR);
   padR.y = padRlerp;
 
   //update ball pos
